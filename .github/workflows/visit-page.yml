@@ -1,0 +1,24 @@
+name: Visit Page Cron Job
+
+on:
+  schedule:
+    - cron: '*/1 * * * *'  # Hər 15 dəqiqədə bir işləsin
+  workflow_dispatch:  # Lazım olsa manual olaraq da işə salına bilər
+
+jobs:
+  visit-page:
+    runs-on: ubuntu-latest  # Linux serverində işə düşəcək
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'  # Python versiyası
+
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Run Visit Page Script
+        run: python visit_page.py
