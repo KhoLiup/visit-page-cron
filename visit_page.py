@@ -1,19 +1,19 @@
 import requests
 
-def visit_page():
+def visit_site():
+    # Ziyarət edəcəyiniz saytın URL-si
     url = "http://wp.pavilion.az/send_reminder.php"
-    cookies = {
-        "sc_is_visitor_unique": "rx9692532.1732373051.ACBEB28A2EBA485A955BE12AD038E0AC.2.2.2.2.2.2.2.2.1",
-        "PHPSESSID": "66c311fe424a87b9dd83871097adaf3e",
-        "__test": "1759c0b2cc931d85f96464b9dced7e0c"
-    }
 
     try:
-        response = requests.get(url, cookies=cookies)
-        print(f"Visited {url} - Status Code: {response.status_code}")
-        print(f"Response: {response.text[:100]}...")
-    except Exception as e:
-        print(f"Error visiting page: {e}")
+        # Sayta GET sorğusu göndərilir
+        response = requests.get(url)
 
-if __name__ == "__main__":
-    visit_page()
+        # Cavab status kodunu və məzmununu yoxlayırıq
+        print(f"Visited {url} - Status Code: {response.status_code}")
+        print(f"Response Content: {response.text[:100]}...")  # İlk 100 simvolu göstərir
+    except Exception as e:
+        # Əgər bir xəta baş verərsə, xətanı çap edir
+        print(f"Error visiting site: {e}")
+
+# Saytı ziyarət edin
+visit_site()
