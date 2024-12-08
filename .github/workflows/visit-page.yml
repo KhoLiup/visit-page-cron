@@ -1,13 +1,13 @@
-name: Visit Page Workflow
+name: Run Selenium Test
 
 on:
   schedule:
-    - cron: '*/1 * * * *'  # Hər 15 dəqiqədə bir işə düşür
+    - cron: '*/2 * * * *'  # Hər 15 dəqiqədə bir işə düşür
   workflow_dispatch:  # Manual olaraq işə salına bilər
 
 jobs:
-  visit-page:
-    runs-on: ubuntu-latest  # Ubuntu mühitində işləyəcək
+  selenium-test:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
@@ -16,10 +16,14 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: '3.x'  # Python versiyası
 
       - name: Install Dependencies
-        run: pip install requests  # `requests` kitabxanasını quraşdırır
+        run: |
+          pip install selenium  # Selenium kitabxanasını quraşdırır
+          sudo apt-get update  # Sistem yenilənməsi
+          sudo apt-get install -y chromium-chromedriver  # Chrome və ChromeDriver-i quraşdırır
+          sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver  # ChromeDriver-in yolunu təyin edir
 
-      - name: Visit Page Script
-        run: python visit_page.py  # Fayl adını `script_name.py` ilə əvəz edin
+      - name: Run Selenium Script
+        run: python visit_page.py  # Selenium skriptini işlədir
