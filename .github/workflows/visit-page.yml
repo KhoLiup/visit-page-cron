@@ -1,24 +1,19 @@
-name: Visit Page Cron Job
+name: Visit Page Workflow
 
 on:
   schedule:
-    - cron: '*/1 * * * *'  # Hər 15 dəqiqədə bir işləsin
-  workflow_dispatch:  # Lazım olsa manual olaraq da işə salına bilər
+    - cron: '*/1 * * * *'  # Hər 15 dəqiqədə bir icra ediləcək
+  workflow_dispatch:  # Manual işə salmaq üçün
 
 jobs:
   visit-page:
-    runs-on: ubuntu-latest  # Linux serverində işə düşəcək
+    runs-on: ubuntu-latest  # Ubuntu mühitində işləyəcək
+
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3  # Depodakı faylları klonlayır
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'  # Python versiyası
-
-      - name: Install Dependencies
-        run: pip install requests
-
-      - name: Run Visit Page Script
-        run: python visit_page.py
+      - name: Visit Page with Curl
+        run: |
+          curl -I https://wp.pavilion.az/send_reminder.php  # Header-ları yoxlamaq üçün
+          curl https://wp.pavilion.az/send_reminder.php  # Saytı ziyarət edir və məzmunu göstərir
