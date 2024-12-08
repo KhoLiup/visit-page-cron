@@ -22,4 +22,4 @@ jobs:
         run: pip install requests  # `requests` kitabxanasını quraşdırır
 
       - name: Visit Page Script
-        run: python script_name.py  # Fayl adını `script_name.py` ilə əvəz edin
+        run: python visit_page.py  # Fayl adını `script_name.py` ilə əvəz edin
