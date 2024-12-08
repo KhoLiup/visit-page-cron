@@ -20,10 +20,16 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install selenium  # Selenium kitabxanasını quraşdırır
-          sudo apt-get update  # Sistem yenilənməsi
-          sudo apt-get install -y chromium-chromedriver  # Chrome və ChromeDriver-i quraşdırır
-          sudo ln -s /usr/lib/chromium-browser/chromedriver /usr/bin/chromedriver  # ChromeDriver-in yolunu təyin edir
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          sudo apt-get install -y libnss3 libgconf-2-4
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
+          wget https://chromedriver.storage.googleapis.com/$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
+          pip install selenium
 
       - name: Run Selenium Script
         run: python visit_page.py  # Selenium skriptini işlədir
