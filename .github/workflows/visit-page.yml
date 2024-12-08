@@ -2,17 +2,24 @@ name: Visit Page Workflow
 
 on:
   schedule:
-    - cron: '*/1 * * * *'  # Hər 15 dəqiqədə bir icra ediləcək
-  workflow_dispatch:  # Lazım olsa manual olaraq işə salına bilər
+    - cron: '*/1 * * * *'  # Hər 15 dəqiqədə bir işə düşür
+  workflow_dispatch:  # Manual olaraq işə salına bilər
 
 jobs:
   visit-page:
     runs-on: ubuntu-latest  # Ubuntu mühitində işləyəcək
 
     steps:
-      - name: Visit Page with Headers
-        run: |
-          curl -H "User-Agent: GitHubActions" \
-               -H "Accept: text/html" \
-               -b "__test=1759c0b2cc931d85f96464b9dced7e0c; PHPSESSID=66c311fe424a87b9dd83871097adaf3e" \
-               http://wp.pavilion.az/send_reminder.php
+      - name: Checkout Repository
+        uses: actions/checkout@v3  # Depodakı faylları klonlayır
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: pip install requests  # `requests` kitabxanasını quraşdırır
+
+      - name: Visit Page Script
+        run: python script_name.py  # Fayl adını `script_name.py` ilə əvəz edin
