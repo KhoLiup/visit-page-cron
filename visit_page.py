@@ -3,29 +3,31 @@ from selenium.webdriver.chrome.service import Service
 import time
 
 def visit_page():
-    url = "https://wp.pavilion.az/send_reminder.php"  # Ziyarət ediləcək səhifənin URL-si
+    url = "http://wp.pavilion.az/send_reminder.php"
 
     # Chrome parametrləri
     options = webdriver.ChromeOptions()
-    # options.add_argument("--headless")  # Başlıq rejimini deaktiv edin
+    options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument(
+        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    )
 
     try:
-        # ChromeDriver ilə brauzeri başlat
         driver = webdriver.Chrome(options=options)
         print(f"Opening {url}...")
         
-        # URL-i ziyarət et
         driver.get(url)
         print(f"Visited {url}")
 
-        # Səhifənin tam yüklənməsini gözləyin
+        # 10 saniyə gözlə
+        print("Staying on the page for 10 seconds...")
         time.sleep(10)
 
         # İş tamamlandı
         print("Finished waiting for 10 seconds.")
-        driver.quit()  # Brauzeri bağla
+        driver.quit()
     except Exception as e:
         print(f"Error visiting page: {e}")
 
