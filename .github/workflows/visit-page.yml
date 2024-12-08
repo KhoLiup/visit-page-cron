@@ -2,7 +2,7 @@ name: Run Selenium Test
 
 on:
   schedule:
-    - cron: '*/2 * * * *'  # Hər 15 dəqiqədə bir işə düşür
+    - cron: '*/15 * * * *'  # Hər 15 dəqiqədə bir işə düşür
   workflow_dispatch:  # Manual olaraq işə salına bilər
 
 jobs:
