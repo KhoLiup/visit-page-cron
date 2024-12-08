@@ -15,5 +15,5 @@ jobs:
 
       - name: Visit Page with Curl
         run: |
-          curl -I https://wp.pavilion.az/send_reminder.php  # Header-ları yoxlamaq üçün
-          curl https://wp.pavilion.az/send_reminder.php  # Saytı ziyarət edir və məzmunu göstərir
+          curl -I http://wp.pavilion.az/send_reminder.php  # Header-ları yoxlamaq üçün
+          curl http://wp.pavilion.az/send_reminder.php  # Saytı ziyarət edir və məzmunu göstərir
