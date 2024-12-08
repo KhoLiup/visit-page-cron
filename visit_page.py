@@ -1,29 +1,21 @@
 import requests
+import time
 
-class SiteVisitor:
-    def __init__(self, url):
-        self.url = url
-
-    def visit(self):
-        try:
-            response = requests.get(self.url)
-            self._log_response(response)
-        except requests.exceptions.RequestException as e:
-            self._log_error(e)
-
-    def _log_response(self, response):
-        print(f"Visited {self.url}")
-        print(f"Status Code: {response.status_code}")
-        if response.ok:
-            print(f"Response Content: {response.text[:100]}...")  # İlk 100 simvolu göstərir
+def visit_page():
+    url = "http://wp.pavilion.az/send_reminder.php"  # Ziyarət ediləcək səhifənin URL-si
+    try:
+        print(f"Visiting {url}...")
+        response = requests.get(url)  # GET sorğusu göndərilir
+        print(f"Visited {url} - Status Code: {response.status_code}")  # Status kodunu çap edir
+        
+        if response.status_code == 200:
+            print("Staying on the page for 10 seconds...")
+            time.sleep(10)  # 10 saniyə gözləyir
+            print("Done staying on the page.")
         else:
-            print("Failed to retrieve the content.")
-
-    def _log_error(self, error):
-        print(f"Error visiting site: {error}")
-
+            print(f"Failed to visit the page. Status Code: {response.status_code}")
+    except Exception as e:
+        print(f"Error visiting page: {e}")
 
 if __name__ == "__main__":
-    url = "https://wp.pavilion.az/send_reminder.php"
-    visitor = SiteVisitor(url)
-    visitor.visit()
+    visit_page()
