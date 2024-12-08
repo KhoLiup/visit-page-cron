@@ -7,7 +7,7 @@ import random
 import time
 
 def visit_page():
-    url = "http://wp.pavilion.az/send_reminder.php"  # Ziyarət ediləcək səhifənin URL-si
+    url = "https://wp.pavilion.az/send_reminder.php"  # Ziyarət ediləcək səhifənin URL-si
 
     # Chrome parametrləri
     options = webdriver.ChromeOptions()
