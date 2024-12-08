@@ -15,4 +15,4 @@ jobs:
           curl -H "User-Agent: GitHubActions" \
                -H "Accept: text/html" \
                -b "__test=1759c0b2cc931d85f96464b9dced7e0c; PHPSESSID=66c311fe424a87b9dd83871097adaf3e" \
-               https://wp.pavilion.az/send_reminder.php
+               http://wp.pavilion.az/send_reminder.php
