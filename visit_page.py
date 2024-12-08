@@ -1,24 +1,30 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 
 def visit_page():
-    url = "http://wp.pavilion.az/send_reminder.php"
+    url = "http://wp.pavilion.az/send_reminder.php"  # Ziyarət ediləcək səhifənin URL-si
 
     # Chrome parametrləri
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")
+    options.add_argument("--headless")  # Başlıq rejimi
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    options.add_argument(
-        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-    )
 
     try:
         driver = webdriver.Chrome(options=options)
         print(f"Opening {url}...")
         
+        # URL-i ziyarət et
         driver.get(url)
+
+        # Elementlərin yüklənməsini gözləyin (misal üçün, ID və ya CLASS olan bir element)
+        WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.TAG_NAME, "body"))
+        )
         print(f"Visited {url}")
 
         # 10 saniyə gözlə
@@ -27,7 +33,7 @@ def visit_page():
 
         # İş tamamlandı
         print("Finished waiting for 10 seconds.")
-        driver.quit()
+        driver.quit()  # Brauzeri bağla
     except Exception as e:
         print(f"Error visiting page: {e}")
 
