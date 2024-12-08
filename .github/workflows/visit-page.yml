@@ -3,17 +3,16 @@ name: Visit Page Workflow
 on:
   schedule:
     - cron: '*/1 * * * *'  # Hər 15 dəqiqədə bir icra ediləcək
-  workflow_dispatch:  # Manual işə salmaq üçün
+  workflow_dispatch:  # Lazım olsa manual olaraq işə salına bilər
 
 jobs:
   visit-page:
     runs-on: ubuntu-latest  # Ubuntu mühitində işləyəcək
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3  # Depodakı faylları klonlayır
-
-      - name: Visit Page with Curl
+      - name: Visit Page with Headers
         run: |
-          curl -I http://wp.pavilion.az/send_reminder.php  # Header-ları yoxlamaq üçün
-          curl http://wp.pavilion.az/send_reminder.php  # Saytı ziyarət edir və məzmunu göstərir
+          curl -H "User-Agent: GitHubActions" \
+               -H "Accept: text/html" \
+               -b "__test=1759c0b2cc931d85f96464b9dced7e0c; PHPSESSID=66c311fe424a87b9dd83871097adaf3e" \
+               https://wp.pavilion.az/send_reminder.php
