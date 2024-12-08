@@ -3,16 +3,16 @@ from selenium.webdriver.chrome.service import Service
 import time
 
 def visit_page():
-    url = "http://wp.pavilion.az/send_reminder.php"  # Ziyarət ediləcək səhifənin URL-si
+    url = "https://wp.pavilion.az/send_reminder.php"  # Ziyarət ediləcək səhifənin URL-si
 
     # Chrome parametrləri
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # Görünməz rejim
+    # options.add_argument("--headless")  # Başlıq rejimini deaktiv edin
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
 
     try:
-        # Brauzeri başlat
+        # ChromeDriver ilə brauzeri başlat
         driver = webdriver.Chrome(options=options)
         print(f"Opening {url}...")
         
@@ -20,8 +20,7 @@ def visit_page():
         driver.get(url)
         print(f"Visited {url}")
 
-        # 10 saniyə gözlə
-        print("Staying on the page for 10 seconds...")
+        # Səhifənin tam yüklənməsini gözləyin
         time.sleep(10)
 
         # İş tamamlandı
